@@ -221,12 +221,11 @@ func (e *Exporter) ScrapeQuery() {
 		//num  metric_name
 		//43  sessions
 		if conn.db != nil {
-			log.Infoln("Connection: ", conn.db)
 			for _, query := range conn.Queries {
-				log.Infoln("SQL: ", query.Sql)
 				rows, err = conn.db.Query(query.Sql)
 				if err != nil {
-					log.Infoln("Error: ", err)
+					log.Infoln("SQL: ", query.Sql)
+					log.Errorln("Error: ", err)
 					break
 				}
 				defer rows.Close()
